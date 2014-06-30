@@ -17,6 +17,14 @@ describe('Controller: formcontroller', function () {
     }));
 
     it('should have an initial count of 0 attempts', function () {
+        expect(scope.data.attempts).toBe(0);
+    });
+
+    it('should increase the attempts by 1 after each submit', function(){
+        scope.submit();
+        expect(scope.data.attempts).toBe(1);
+        scope.submit();
+        expect(scope.data.attempts).toBe(2);
 
     });
 });
