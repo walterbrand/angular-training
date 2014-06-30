@@ -3,8 +3,8 @@
     <head></head>
     <body>
         <form name="myform" ng-controller="formcontroller">
-            Voornaam: <input type="text" name="firstname" /><br />
-            Achternaam: <input type="text" name="lastname" /><br />
+            Voornaam: <input type="text" name="firstname" ng-model="data.firstName" required/><br />
+            Achternaam: <input type="text" name="lastname" ng-model="data.lastName" required/><br />
 
             <input type="button" value="Versturen" ng-click="submit()"/><br /><br />
             Aantal pogingen : {{data.attempts}} <br />
