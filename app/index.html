@@ -1,18 +1,76 @@
 <!DOCTYPE html>
 <html ng-app="app">
-    <head></head>
-    <body>
-        <form name="myform" ng-controller="formcontroller">
-            Voornaam: <input type="text" name="firstname" /><br />
-            Achternaam: <input type="text" name="lastname" /><br />
+<head>
+    <style>
+        .summary{
+            margin: 1rem;
+            border: .1rem solid #CCC;
+            border-radius: 1rem / 1.5rem;
+        }
+    </style>
+</head>
+<body>
+<form name="myform" ng-controller="formcontroller">
+    Voornaam: <input type="text" name="firstname" ng-model="data.firstName" required/><br/>
+    Achternaam: <input type="text" name="lastname" ng-model="data.lastName" required/><br/>
 
-            <input type="button" value="Versturen" ng-click="submit()"/><br /><br />
-            Aantal pogingen : {{data.attempts}} <br />
-            Resultaat : <span ng-if="data.complete">Correct</span>
-                        <span ng-if="!data.complete">Nog niet correct</span>
-        </form>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/formcontroller.js"></script>
-    </body>
+    <label for="transactionDate">Uitvoerdatum: </label>
+    <input type="date" name="transactionDate" ng-model="transaction.date"
+           placeholder="dd-mm-yyyy" min="30-06-2014" max="30-06-2015" required/>
+   <span class="error" ng-show="myForm.transactionDate.$error.required">
+       Required!</span>
+   <span class="error" ng-show="myForm.transactionDate.$error.date">
+       Not a valid date!</span> <br />
+
+    <label for="amount">Bedrag: </label>
+    <input type="number"
+           name="amount"
+           min="0"
+           max="50000"
+           required
+           ng-model="transaction.amount"
+           change="onChangeAmount">
+    <br />
+
+    <div>
+        <label for="moneyInput">MoneyInput Directive </label>
+        <money-input name="moneyInput" ng-model="transaction.amount"></money-input>
+    </div>
+
+
+    <fieldset class="summary">
+        <strong>Bedrag output format: </strong> <br />
+        <div>
+            <span>&euro;</span>
+            <span style="width:auto;">{{transaction.amount | currencyNoFraction}}</span>
+            <span style="font-size: xlarge; margin-right: 5px; ">,</span>
+            <span>{{transaction.amount | currencyFraction}}</span>
+        </div>
+        <hr/>
+
+        <strong>Bedrag output using filters: </strong> <br />
+        noFilter: <span>{{transaction.amount}}</span>
+        <br/>
+        currencyFilter: <span>{{transaction.amount | currency}}</span>
+        <br/>
+        currencyFractionFilter: <span>{{transaction.amount | currencyFraction}}</span>
+        <br/>
+        currencyNoFractionFilter: <span>{{transaction.amount | currencyNoFraction}}</span>
+        <br/>
+        numberFilter: <span>{{transaction.amount | number}}</span>
+
+        <hr/>
+
+        Aantal pogingen : {{data.attempts}} <br/>
+        Resultaat : <span ng-if="data.complete">Correct</span>
+        <span ng-if="!data.complete">Nog niet correct</span>
+    </fieldset>
+
+    <input type="button" value="Versturen" ng-click="submit()"/><br/><br/>
+
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/formcontroller.js"></script>
+</body>
 </html>
