@@ -28,6 +28,7 @@ angular.module('app').controller('formcontroller', ['$scope', function ($scope) 
 	};
 }]);
 angular.module('app').directive('moneyInput', function () {
+	'use strict';
 	return {
 		restrict: 'E',
 		template: '<div  >' +
@@ -40,18 +41,20 @@ angular.module('app').directive('moneyInput', function () {
 });
 
 angular.module('app').filter('currencyFraction', [ '$filter', function ($filter) {
+	'use strict';
 	var currency = $filter('currency'),
 		formats = {
-			CURRENCY_SYM: "$",
-			DECIMAL_SEP: ".",
-			GROUP_SEP: ","
+			CURRENCY_SYM: '$',
+			DECIMAL_SEP: '.',
+			GROUP_SEP: ','
 		};
 	return function (amount, symbol) {
 		var value = currency(amount, symbol).split(formats.DECIMAL_SEP);
 		return value[1] || '';
-	}
+	};
 }]);
 angular.module('app').filter('currencyNoFraction', [ '$filter', function ($filter) {
+	'use strict';
 	var currency = $filter('number'),
 		formats = {
 			CURRENCY_SYM: '$',
@@ -61,5 +64,5 @@ angular.module('app').filter('currencyNoFraction', [ '$filter', function ($filte
 	return function (amount) {
 		var value = currency(amount).split(formats.DECIMAL_SEP)[0];
 		return value;
-	}
+	};
 }]);
