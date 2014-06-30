@@ -2,14 +2,14 @@
 <html ng-app="app">
     <head></head>
     <body>
-        <form name="myform" ng-controller="formcontroller">
-            Voornaam: <input type="text" name="firstname" /><br />
-            Achternaam: <input type="text" name="lastname" /><br />
+        <form name="myform" ng-controller="formcontroller" novalidate>
+            Voornaam: <input type="text" name="firstname" ng-model="data.fistname" required /><br />
+            Achternaam: <input type="text" name="lastname" ng-model="data.lastname" required /><br />
 
             <input type="button" value="Versturen" ng-click="submit()"/><br /><br />
             Aantal pogingen : {{data.attempts}} <br />
-            Resultaat : <span ng-if="data.complete">Correct</span>
-                        <span ng-if="!data.complete">Nog niet correct</span>
+            Resultaat : <span ng-if="myform.$valid">Correct</span>
+                        <span ng-if="!myform.$valid">Nog niet correct</span>
         </form>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>
         <script src="scripts/app.js"></script>

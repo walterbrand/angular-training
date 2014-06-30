@@ -7,5 +7,6 @@ angular.module('app').controller('formcontroller', ['$scope', function($scope){
 
     $scope.submit = function(){
         this.data.attempts++;
-    }
+    };
+
 }]);
