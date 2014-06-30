@@ -19,8 +19,9 @@ angular.module('app').controller('formcontroller', ['$scope', function ($scope) 
 	};
 
 	$scope.submit = function () {
+		$scope.data.attempts++;
+
 		if ($scope.data.firstName.length > 0 && $scope.data.lastName.length > 0) {
-			$scope.data.attempts++;
 			$scope.data.complete = true;
 		} else {
 			$scope.data.complete = false;

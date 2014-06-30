@@ -30,11 +30,11 @@ describe('Controller: formcontroller', function () {
 
 	it('should check the value of firstName and lastName not to be empty before incrementing the attemps', function(){
 		scope.submit();
-		expect(scope.data.attempts).toBe(0);
+		expect(scope.data.attempts).toBe(1);
 		scope.data.firstName = 'John';
 		scope.data.lastName = 'Doe';
-
-		expect(scope.data.attempts).toBe(1);
+		scope.submit();
+		expect(scope.data.attempts).toBe(2);
 
 	});
 });
